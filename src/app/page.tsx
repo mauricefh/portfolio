@@ -1,10 +1,20 @@
+"use client";
+import { useTheme } from "next-themes";
+
 export default function Home() {
+  const { theme } = useTheme();
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col items-center justify-center">
-        <h1>Website under development</h1>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center"></footer>
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto p-8">
+        <div className="rounded-lg bg-surface p-6">
+          <h1 className="text-2xl font-bold">My Portfolio</h1>
+          <p className="text-muted">Welcome to my portfolio</p>
+          <button className="rounded bg-accent px-4 py-2 text-foreground hover:bg-accent-hover">
+            Contact Me
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
