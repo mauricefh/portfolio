@@ -32,6 +32,9 @@
       "@/images": [
         "./src/app/images/*"
       ],
+      "@/public": [
+        "./public/*"
+      ],
       "@/styles": [
         "./src/app/components/*"
       ]
