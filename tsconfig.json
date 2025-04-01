@@ -32,6 +32,15 @@
       "@/images": [
         "./src/app/images/*"
       ],
+      "@/interfaces": [
+        "./src/app/interfaces/*"
+      ],
+      "@/hooks": [
+        "./src/app/hooks/*"
+      ],
+      "@/sections": [
+        "./src/app/sections/*"
+      ],
       "@/public": [
         "./public/*"
       ],
