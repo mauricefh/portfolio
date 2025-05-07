@@ -52,11 +52,6 @@ export const myProjects = [
       },
       {
         id: 2,
-        name: "TailwindCSS",
-        path: "assets/tailwindcss.png",
-      },
-      {
-        id: 3,
         name: "TypeScript",
         path: "/assets/typescript.png",
       },
