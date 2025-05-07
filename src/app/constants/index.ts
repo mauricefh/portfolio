@@ -34,7 +34,7 @@ export const myProjects = [
     title: "Helhest Cane Corso - Dog Breeder Website",
     desc: "Helhest Cane Corso is a premier dog breeding platform dedicated to the exceptional Cane Corso breed. With a focus on health, temperament, and pedigree, they provide carefully raised puppies ready for adoption. The streamlined request process makes it easy for dog lovers to find their perfect companion, ensuring each puppy is matched with a loving home.",
     subdesc:
-      "Built as a unique Software-as-a-Service app with Next.js 15, Tailwind CSS, TypeScript, SQLite, Helhest Cane Corso is designed for simplicity and multilanguage support.",
+      "Built as a unique Software-as-a-Service app with Next.js 15, MaterialUI, TypeScript, PostgreSQL, Helhest Cane Corso is designed for simplicity and multilanguage support.",
     href: "https://www.helhestcanecorso.com",
     texture: "/textures/project/project1.mp4",
     logo: "/assets/project-logo1.png",
