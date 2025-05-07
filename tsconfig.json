@@ -15,6 +15,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "allowImportingTsExtensions": true,
     "jsx": "preserve",
     "incremental": true,
     "plugins": [
@@ -37,6 +38,9 @@
       ],
       "@/hooks": [
         "./src/app/hooks/*"
+      ],
+      "@/constants": [
+        "./src/app/constants/*"
       ],
       "@/sections": [
         "./src/app/sections/*"
