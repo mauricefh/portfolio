@@ -1,10 +1,24 @@
+"use client";
+import Navbar from "@/app/sections/Navbar";
+import Hero from "@/app/sections/Hero";
+import About from "@/app/sections/About";
+import Projects from "@/app/sections/Projects";
+import Clients from "@/app/sections/Clients";
+import WorkExperience from "@/app/sections/Experience";
+import Contact from "@/app/sections/Contact";
+import Footer from "@/app/sections/Footer";
+
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col items-center justify-center">
-        <h1>Website under development</h1>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center"></footer>
-    </div>
+    <main className="relative mx-auto max-w-7xl">
+      <Navbar />
+      <Hero />
+      <About />
+      <Projects />
+      <Clients />
+      <WorkExperience />
+      <Contact />
+      <Footer />
+    </main>
   );
 }
