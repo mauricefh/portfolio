@@ -3,6 +3,8 @@ export const lastName = "Filiatreault";
 export const fullName = `${firstName} ${lastName}`;
 export const location = "Edmonton, Alberta, Canada";
 export const email = "inbox@mauricefh.com";
+export const business = "MFH Labs";
+export const slogan = "Made for humans";
 
 export const navLinks = [
   {
@@ -37,7 +39,7 @@ export const myProjects = [
       "Built as a unique Software-as-a-Service app with Next.js 15, MaterialUI, TypeScript, PostgreSQL, Helhest Cane Corso is designed for simplicity and multilanguage support.",
     href: "https://www.helhestcanecorso.com",
     texture: "/textures/project/project1.mp4",
-    logo: "/assets/project-logo1.png",
+    logo: "/assets/project-logo1.svg",
     logoStyle: {
       backgroundColor: "#2A1816",
       border: "0.2px solid #36201D",
@@ -47,58 +49,73 @@ export const myProjects = [
     tags: [
       {
         id: 1,
-        name: "React.js",
-        path: "/assets/react.svg",
+        name: "Next.js",
+        path: "/assets/nextjs.svg",
       },
       {
         id: 2,
         name: "TypeScript",
-        path: "/assets/typescript.png",
+        path: "/assets/typescript.svg",
+      },
+      {
+        id: 3,
+        name: "MaterialUI",
+        path: "/assets/materialui.svg",
+      },
+      {
+        id: 4,
+        name: "PostgreSQL",
+        path: "/assets/postgresql.svg",
+      },
+      {
+        id: 5,
+        name: "Vercel",
+        path: "/assets/vercel.svg",
+      },
+    ],
+  },
+  {
+    title: "Portfolio",
+    desc: "A modern 3D portfolio built with Next.js, TypeScript, Three.js, and Tailwind CSS. Showcasing creative projects, skills, and seamless interactivity—deployed with Vercel for blazing-fast performance.",
+    subdesc: "",
+    href: "https://www.mauricefh.com",
+    texture: "/textures/project/placeholder.mp4",
+    logo: "/assets/logo-color.svg",
+    logoStyle: {
+      backgroundColor: "#2A1816",
+      border: "0.2px solid #36201D",
+      boxShadow: "0px 0px 60px 0px #AA3C304D",
+    },
+    spotlight: "/assets/spotlight2.png",
+    tags: [
+      {
+        id: 1,
+        name: "Next.js",
+        path: "/assets/nextjs.svg",
+      },
+      {
+        id: 2,
+        name: "TypeScript",
+        path: "/assets/typescript.svg",
+      },
+      {
+        id: 3,
+        name: "ThreeJS",
+        path: "/assets/threejs.svg",
+      },
+      {
+        id: 4,
+        name: "Tailwind",
+        path: "/assets/tailwind.svg",
+      },
+      {
+        id: 5,
+        name: "Vercel",
+        path: "/assets/vercel.svg",
       },
     ],
   },
 ];
-
-export const calculateSizes = (
-  isSmall: boolean,
-  isMobile: boolean,
-  isTablet: boolean,
-) => {
-  return {
-    deskScale: isSmall ? 0.05 : isMobile ? 0.06 : 0.065,
-    deskPosition: isMobile
-      ? ([0.5, -4.5, 0] as [number, number, number])
-      : ([0.25, -5.5, 0] as [number, number, number]),
-    cubePosition: (isSmall
-      ? [4, -5, 0]
-      : isMobile
-        ? [5, -5, 0]
-        : isTablet
-          ? [5, -5, 0]
-          : [9, -5.5, 0]) as [number, number, number],
-    reactLogoPosition: (isSmall
-      ? [3, 4, 0]
-      : isMobile
-        ? [5, 4, 0]
-        : isTablet
-          ? [5, 4, 0]
-          : [12, 3, 0]) as [number, number, number],
-    ringPosition: (isSmall
-      ? [-5, 7, 0]
-      : isMobile
-        ? [-10, 10, 0]
-        : isTablet
-          ? [-12, 10, 0]
-          : [-24, 10, 0]) as [number, number, number],
-    targetPosition: (isSmall
-      ? [-5, -10, -10]
-      : isMobile
-        ? [-9, -10, -10]
-        : isTablet
-          ? [-11, -7, -10]
-          : [-13, -13, -10]) as [number, number, number],
-  };
-};
 
 export const workExperiences = [
   {
@@ -149,7 +166,7 @@ export const workExperiences = [
           "Reduced bounce rates by 15% by diagnosing performance bottlenecks.",
       },
     ],
-    icon: "/assets/logo.svg",
+    icon: "/assets/logo-color.svg",
     animation: "clapping",
   },
   {
@@ -185,7 +202,48 @@ export const workExperiences = [
           "Saved 15 hours per project by publishing reusable NuGet packages.",
       },
     ],
-    icon: "/assets/hoc.svg",
+    icon: "/assets/hoc.png",
     animation: "victory",
   },
 ];
+
+export const calculateSizes = (
+  isSmall: boolean,
+  isMobile: boolean,
+  isTablet: boolean,
+) => {
+  return {
+    deskScale: isSmall ? 0.05 : isMobile ? 0.06 : 0.065,
+    deskPosition: isMobile
+      ? ([0.5, -4.5, 0] as [number, number, number])
+      : ([0.25, -5.5, 0] as [number, number, number]),
+    cubePosition: (isSmall
+      ? [4, -5, 0]
+      : isMobile
+        ? [5, -5, 0]
+        : isTablet
+          ? [5, -5, 0]
+          : [9, -5.5, 0]) as [number, number, number],
+    reactLogoPosition: (isSmall
+      ? [3, 4, 0]
+      : isMobile
+        ? [5, 4, 0]
+        : isTablet
+          ? [5, 4, 0]
+          : [12, 3, 0]) as [number, number, number],
+    ringPosition: (isSmall
+      ? [-5, 7, 0]
+      : isMobile
+        ? [-10, 10, 0]
+        : isTablet
+          ? [-12, 10, 0]
+          : [-24, 10, 0]) as [number, number, number],
+    targetPosition: (isSmall
+      ? [-5, -10, -10]
+      : isMobile
+        ? [-9, -10, -10]
+        : isTablet
+          ? [-11, -7, -10]
+          : [-13, -13, -10]) as [number, number, number],
+  };
+};
