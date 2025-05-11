@@ -6,10 +6,44 @@ import { useRef, useEffect } from "react";
 import { useGLTF, useAnimations, useVideoTexture } from "@react-three/drei";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import * as THREE from "three";
+import { GLTF } from "three-stdlib";
 
-const DemoComputer = (props) => {
-  const group = useRef();
-  const { nodes, materials, animations } = useGLTF("/models/computer.glb");
+interface DemoComputerProps {
+  texture: string;
+}
+
+type GLTFResult = GLTF & {
+  nodes: {
+    [name: string]: THREE.Mesh;
+    "monitor-screen": THREE.Mesh;
+    "Monitor-B-_computer_0_1": THREE.Mesh;
+    "Monitor-B-_computer_0_2": THREE.Mesh;
+    "Monitor-B-_computer_0_3": THREE.Mesh;
+    "Monitor-B-_computer_0_4": THREE.Mesh;
+    "Monitor-B-_computer_0_5": THREE.Mesh;
+    "Monitor-B-_computer_0_6": THREE.Mesh;
+    "Monitor-B-_computer_0_7": THREE.Mesh;
+    "Monitor-B-_computer_0_8": THREE.Mesh;
+  };
+  materials: {
+    [name: string]: THREE.Material;
+    computer: THREE.Material;
+    base__0: THREE.Material;
+    Material_36: THREE.Material;
+    Material_35: THREE.Material;
+    Material_34: THREE.Material;
+    keys: THREE.Material;
+    keys2: THREE.Material;
+    Material_37: THREE.Material;
+  };
+};
+
+const DemoComputer = (props: DemoComputerProps) => {
+  const group = useRef<THREE.Group>(null);
+  const { nodes, materials, animations } = useGLTF(
+    "/models/computer.glb",
+  ) as unknown as GLTFResult;
   const { actions } = useAnimations(animations, group);
 
   const txt = useVideoTexture(
@@ -23,11 +57,13 @@ const DemoComputer = (props) => {
   }, [txt]);
 
   useGSAP(() => {
-    gsap.from(group.current.rotation, {
-      y: Math.PI / 2,
-      duration: 1,
-      ease: "power3.out",
-    });
+    if (group.current) {
+      gsap.from(group.current.rotation, {
+        y: Math.PI / 2,
+        duration: 1,
+        ease: "power3.out",
+      });
+    }
   }, [txt]);
 
   return (

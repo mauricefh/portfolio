@@ -6,14 +6,47 @@ Files: developer.glb [981.62KB] */
 import React, { useEffect, useRef } from "react";
 import { useGraph } from "@react-three/fiber";
 import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
-import { SkeletonUtils } from "three-stdlib";
+import { GLTF, SkeletonUtils } from "three-stdlib";
+import * as THREE from "three";
 
-const Developer = ({ animationName = "idle", ...props }) => {
-  const group = useRef("");
+type GLTFResult = GLTF & {
+  nodes: {
+    Hips: THREE.Object3D;
+    Wolf3D_Hair: THREE.SkinnedMesh;
+    Wolf3D_Glasses: THREE.SkinnedMesh;
+    Wolf3D_Body: THREE.SkinnedMesh;
+    Wolf3D_Outfit_Top: THREE.SkinnedMesh;
+    Wolf3D_Outfit_Bottom: THREE.SkinnedMesh;
+    Wolf3D_Outfit_Footwear: THREE.SkinnedMesh;
+    EyeLeft: THREE.SkinnedMesh;
+    EyeRight: THREE.SkinnedMesh;
+    Wolf3D_Head: THREE.SkinnedMesh;
+    Wolf3D_Teeth: THREE.SkinnedMesh;
+  };
+  materials: {
+    Wolf3D_Hair: THREE.Material;
+    Wolf3D_Glasses: THREE.Material;
+    Wolf3D_Body: THREE.Material;
+    Wolf3D_Outfit_Top: THREE.Material;
+    Wolf3D_Outfit_Bottom: THREE.Material;
+    Wolf3D_Outfit_Footwear: THREE.Material;
+    Wolf3D_Eye: THREE.Material;
+    Wolf3D_Skin: THREE.Material;
+    Wolf3D_Teeth: THREE.Material;
+  };
+};
+
+interface DeveloperProps {
+  animationName?: "idle" | "salute" | "clapping" | "victory";
+  [key: string]: any;
+}
+
+const Developer = ({ animationName = "idle", ...props }: DeveloperProps) => {
+  const group = useRef<THREE.Group>(null);
 
   const { scene } = useGLTF("/models/animations/developer.glb");
   const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene]);
-  const { nodes, materials } = useGraph(clone);
+  const { nodes, materials } = useGraph(clone) as unknown as GLTFResult;
 
   const { animations: idleAnimation } = useFBX("/models/animations/idle.fbx");
   const { animations: saluteAnimation } = useFBX(
@@ -42,9 +75,12 @@ const Developer = ({ animationName = "idle", ...props }) => {
   );
 
   useEffect(() => {
-    actions[animationName]?.reset().fadeIn(0.5).play();
-    return () => actions[animationName]?.fadeOut(0.5);
-  }, [animationName]);
+    const action = actions[animationName];
+    if (action) {
+      action.reset().fadeIn(0.5).play();
+      return () => void action.fadeOut(0.5);
+    }
+  }, [animationName, actions]);
 
   return (
     <group ref={group} {...props} dispose={null}>
