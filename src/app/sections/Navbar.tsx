@@ -1,6 +1,11 @@
 import { useState } from "react";
 
-import { navLinks, firstName } from "@/app/constants/index.ts";
+import {
+  navLinks,
+  firstName,
+  business,
+  slogan,
+} from "@/app/constants/index.ts";
 
 const NavItems = ({ onClick = () => {} }) => (
   <ul className="nav-ul">
@@ -28,7 +33,10 @@ const Navbar = () => {
             href="/"
             className="text-xl font-bold text-neutral-400 transition-colors hover:text-white"
           >
-            {firstName}
+            <div className="flex flex-col">
+              <span>{business}</span>
+              <span className="text-xs text-muted">{slogan}</span>
+            </div>
           </a>
 
           <button
