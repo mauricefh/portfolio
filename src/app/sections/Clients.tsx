@@ -1,5 +1,13 @@
 import { clientReviews } from "@/app/constants/index.ts";
 
+interface ClientReviewsProps {
+  id: number;
+  review: string;
+  img: string;
+  name: string;
+  position: number;
+}
+
 const Clients = () => {
   if (!clientReviews || clientReviews.length === 0) {
     return null;
@@ -10,7 +18,7 @@ const Clients = () => {
       <h3 className="head-text">Hear from My Clients</h3>
 
       <div className="client-container">
-        {clientReviews.map((item) => (
+        {clientReviews.map((item: ClientReviewsProps) => (
           <div key={`review-${item.id}`} className="client-review">
             <div>
               <p className="font-light text-white-800">{item.review}</p>

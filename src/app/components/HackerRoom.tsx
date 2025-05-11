@@ -5,9 +5,52 @@ Files: hacker-room-new.glb [34.62MB]
 */
 
 import { useGLTF, useTexture } from "@react-three/drei";
+import { GLTF } from "three-stdlib";
+import * as THREE from "three";
 
-export function HackerRoom(props) {
-  const { nodes, materials } = useGLTF("/models/hacker-room.glb");
+type GLTFResult = GLTF & {
+  nodes: {
+    screen_screens_0: THREE.SkinnedMesh;
+    screen_glass_glass_0: THREE.SkinnedMesh;
+    table_table_mat_0_1: THREE.SkinnedMesh;
+    table_table_mat_0_2: THREE.SkinnedMesh;
+    table_table_mat_0_3: THREE.SkinnedMesh;
+    table_table_mat_0_4: THREE.SkinnedMesh;
+    table_table_mat_0_5: THREE.SkinnedMesh;
+    table_table_mat_0_6: THREE.SkinnedMesh;
+    table_table_mat_0_7: THREE.SkinnedMesh;
+    table_table_mat_0_8: THREE.SkinnedMesh;
+    table_table_mat_0_9: THREE.SkinnedMesh;
+    table_table_mat_0_10: THREE.SkinnedMesh;
+    table_table_mat_0_11: THREE.SkinnedMesh;
+    table_table_mat_0_12: THREE.SkinnedMesh;
+  };
+  materials: {
+    screens: THREE.Material;
+    glass: THREE.Material;
+    table_mat: THREE.Material;
+    computer_mat: THREE.Material;
+    server_mat: THREE.Material;
+    vhsPlayer_mat: THREE.Material;
+    stand_mat: THREE.Material;
+    mat_mat: THREE.Material;
+    arm_mat: THREE.Material;
+    tv_mat: THREE.Material;
+    cables_mat: THREE.Material;
+    props_mat: THREE.Material;
+    ground_mat: THREE.Material;
+    key_mat: THREE.Material;
+  };
+};
+
+interface HackerRoomProps {
+  [key: string]: any;
+}
+
+export function HackerRoom(props: HackerRoomProps) {
+  const { nodes, materials } = useGLTF(
+    "/models/hacker-room.glb",
+  ) as unknown as GLTFResult;
 
   const monitortxt = useTexture("textures/desk/monitor.png");
   const screenTxt = useTexture("textures/desk/screen.png");

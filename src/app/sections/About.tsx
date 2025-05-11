@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Globe from "react-globe.gl";
+import Globe, { GlobeProps } from "react-globe.gl";
 
 import Button from "@/app/components/Button.tsx";
 import { email, fullName, location } from "@/app/constants";
@@ -64,9 +64,8 @@ const About = () => {
                 height={326}
                 width={326}
                 backgroundColor="rgba(0, 0, 0, 0)"
-                backgroundImageOpacity={0.5}
-                showAtmosphere
-                showGraticules
+                showAtmosphere={true}
+                showGraticules={true}
                 globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
                 bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
                 labelsData={[

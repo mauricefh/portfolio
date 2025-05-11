@@ -6,8 +6,23 @@ import Developer from "@/app/components/Developer.tsx";
 import CanvasLoader from "@/app/components/Loading.tsx";
 import { workExperiences } from "@/app/constants/index.ts";
 
+type AnimationName = "idle" | "salute" | "clapping" | "victory";
+
 const WorkExperience = () => {
-  const [animationName, setAnimationName] = useState("idle");
+  const [animationName, setAnimationName] = useState<AnimationName>("idle");
+  const handleAnimationChange = (name: string) => {
+    const validAnimations: AnimationName[] = [
+      "idle",
+      "salute",
+      "clapping",
+      "victory",
+    ];
+    if (validAnimations.includes(name as AnimationName)) {
+      setAnimationName(name as AnimationName);
+    } else {
+      setAnimationName("idle");
+    }
+  };
 
   return (
     <section className="c-space my-20" id="work">
@@ -37,9 +52,11 @@ const WorkExperience = () => {
               {workExperiences.map((item, index) => (
                 <div
                   key={index}
-                  onClick={() => setAnimationName(item.animation.toLowerCase())}
+                  onClick={() =>
+                    handleAnimationChange(item.animation.toLowerCase())
+                  }
                   onPointerOver={() =>
-                    setAnimationName(item.animation.toLowerCase())
+                    handleAnimationChange(item.animation.toLowerCase())
                   }
                   onPointerOut={() => setAnimationName("idle")}
                   className="work-content_container group"

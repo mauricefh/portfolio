@@ -7,9 +7,26 @@
 */
 
 import { Float, useGLTF } from "@react-three/drei";
+import * as THREE from "three";
+import { GLTF } from "three-stdlib";
 
-const ReactLogo = (props) => {
-  const { nodes, materials } = useGLTF("models/react.glb");
+interface ReactLogoProps {
+  position?: THREE.Vector3 | [number, number, number];
+}
+
+type GLTFResult = GLTF & {
+  nodes: {
+    "React-Logo_Material002_0": THREE.SkinnedMesh;
+  };
+  materials: {
+    "Material.002": THREE.Material;
+  };
+};
+
+const ReactLogo = (props: ReactLogoProps) => {
+  const { nodes, materials } = useGLTF(
+    "models/react.glb",
+  ) as unknown as GLTFResult;
 
   return (
     <Float floatIntensity={1}>
