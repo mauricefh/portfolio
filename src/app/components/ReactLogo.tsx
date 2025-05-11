@@ -10,7 +10,9 @@ import { Float, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
 
-interface ReactLogoProps {}
+interface ReactLogoProps {
+  position?: THREE.Vector3 | [number, number, number];
+}
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -22,7 +24,9 @@ type GLTFResult = GLTF & {
 };
 
 const ReactLogo = (props: ReactLogoProps) => {
-  const { nodes, materials } = useGLTF("models/react.glb");
+  const { nodes, materials } = useGLTF(
+    "models/react.glb",
+  ) as unknown as GLTFResult;
 
   return (
     <Float floatIntensity={1}>
