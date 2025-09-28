@@ -19,13 +19,8 @@ export default function Projects() {
   ];
 
   return (
-    <section
-      id="projects"
-      className="p-4 bg-surface border border-muted border-2 rounded-lg"
-    >
-      <h3 className="font-family-display text-4xl text-primary mb-2 text-center">
-        &lt;PROJECTS&gt;
-      </h3>
+    <section id="projects">
+      <h3>&lt;PROJECTS&gt;</h3>
       <div>
         {projects.map((project) => {
           return <div key={project.id}>{project.title}</div>;
@@ -34,9 +29,3 @@ export default function Projects() {
     </section>
   );
 }
-
-/*
-1. Load all the image and create the fan with animation and translate
-2. when the user click on the image update the active data and image
-
-*/

@@ -22,25 +22,35 @@
 
 @layer base {
   [data-theme="dark"] {
-    --color-background: #faf9f6;
-    --color-surface: #ffffff; /* for cards, modals, etc */
+    --color-background: #1a1a1d;
+    --color-surface: #242429;
     --color-primary: #ff6b35;
     --color-secondary: #ffd166;
-    --color-foreground: #2b2d42; /* main text color */
-    --color-muted: #6c757d; /* secondary text */
-    --color-border: #e0e0e0;
+    --color-foreground: #f1f1f1;
+    --color-muted: #a9a9b3;
+    --color-border: #33343a;
   }
 
-  h1 {
-    font-size: var(--text-2xl);
+  :root {
+    @apply bg-background text-foreground;
   }
 
-  h2 {
-    font-size: var(--text-xl);
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-primary font-family-display;
+  }
+
+  p,
+  a,
+  span {
+    @apply font-family-body text-foreground;
+  }
+
+  a {
+    @apply hover:text-primary transition-colors;
   }
 }
-
-/* img { */
-/* display: block; */
-/* max-width: 100%; */
-/* } */
