@@ -4,10 +4,10 @@ import Projects from "@/components/Projects";
 
 export default function Home() {
   return (
-    <main>
+    <>
       <Header />
       <Hero />
       <Projects />
-    </main>
+    </>
   );
 }

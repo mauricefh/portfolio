@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "text": "About",
+    "title": "about",
+    "href": "#about"
+  },
+  {
+    "id": 2,
+    "text": "Projects",
+    "title": "projects",
+    "href": "#projects"
+  },
+  {
+    "id": 3,
+    "text": "Hobbies",
+    "title": "hobbies",
+    "href": "#hobbies"
+  },
+  {
+    "id": 4,
+    "text": "Contact",
+    "title": "contact",
+    "href": "#contact"
+  }
+]

@@ -19,12 +19,14 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects">
-      <h3>&lt;PROJECTS&gt;</h3>
-      <div>
-        {projects.map((project) => {
-          return <div key={project.id}>{project.title}</div>;
-        })}
+    <section id="projects" className="py-16">
+      <div className="container mx-auto px-4 flex flex-col items-center">
+        <h3>&lt;PROJECTS&gt;</h3>
+        <div>
+          {projects.map((project) => {
+            return <div key={project.id}>{project.title}</div>;
+          })}
+        </div>
       </div>
     </section>
   );

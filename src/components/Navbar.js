@@ -1,35 +1,9 @@
 import NavItem from "./NavItem";
+import links from "../constants/navigation.json";
 
 export default function Navbar() {
-  const links = [
-    {
-      id: 1,
-      text: "About",
-      title: "about",
-      href: "#about",
-    },
-    {
-      id: 2,
-      text: "Projects",
-      title: "projects",
-      href: "#projects",
-    },
-    {
-      id: 3,
-      text: "Hobbies",
-      title: "hobbies",
-      href: "#hobbies",
-    },
-    {
-      id: 4,
-      text: "Contact",
-      title: "contact",
-      href: "#contact",
-    },
-  ];
-
   return (
-    <nav>
+    <nav className="hidden md:flex">
       <ul className="flex gap-6">
         {links.map((link) => {
           return (

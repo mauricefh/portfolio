@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Press+Start+2P&display=swap");
 @import "tailwindcss";
-/* @plugin "daisyui"; */
 
 @theme {
   --font-family-display:
@@ -10,7 +9,6 @@
     "Nunito", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
-  --color-*: initial;
   --color-background: #faf9f6;
   --color-surface: #ffffff; /* for cards, modals, etc */
   --color-primary: #ff6b35;
