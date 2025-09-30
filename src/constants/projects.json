@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "title": "Freenance",
+    "description": "This is my freenance application",
+    "challenge": "This was my challenge",
+    "solution": "This is how I solve the issue",
+    "techs": [
+      { "text": "React", "color": "blue" },
+      { "text": "TypeScript", "color": "indigo" }
+    ],
+    "github": "github.com/mauricefh/repository",
+    "demo": "mauricefh.com/project_name",
+    "medias": [
+      {
+        "id": 1,
+        "type": "image",
+        "src": "/freenance/screenshot_1.png",
+        "alt": "Landing page of freenance",
+        "isPrimary": true,
+        "isActive": true
+      },
+      {
+        "id": 2,
+        "type": "image",
+        "src": "/freenance/screenshot_2.png",
+        "alt": "Login page of freenance",
+        "isPrimary": false,
+        "isActive": false
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Portfolio",
+    "description": "This is a portfolio project",
+    "challenge": "This was my challenge",
+    "solution": "This is how I solve the issue",
+    "techs": [
+      { "text": "NodeJS", "color": "green" },
+      { "text": "OpenAI", "color": "gray" }
+    ],
+    "github": "github.com/mauricefh/repository",
+    "demo": "mauricefh.com/project_name",
+    "medias": [
+      {
+        "id": 1,
+        "type": "image",
+        "src": "/image1.webp",
+        "alt": "First Image",
+        "isPrimary": true,
+        "isActive": true
+      },
+      {
+        "id": 2,
+        "type": "image",
+        "src": "/image2.webp",
+        "alt": "Seconde Image",
+        "isPrimary": false,
+        "isActive": false
+      },
+      {
+        "id": 3,
+        "type": "image",
+        "src": "/image3.webp",
+        "alt": "Third Image",
+        "isPrimary": false,
+        "isActive": false
+      },
+      {
+        "id": 4,
+        "type": "video",
+        "src": "/video.mp4",
+        "alt": "First Video",
+        "isPrimary": false,
+        "isActive": false
+      }
+    ]
+  }
+]

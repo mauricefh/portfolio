@@ -1,33 +1,20 @@
-export default function Projects() {
-  const projects = [
-    {
-      id: 1,
-      title: "Freenance",
-      description: "This is my freenance application",
-      challenge: "This was my challenge",
-      solution: "This is how I solve the issue",
-      technologies: ["/icons/react.svg", "/icons/typescript.svg"],
-    },
-    {
-      id: 2,
-      title: "Portfolio",
-      description: "This is a portfolio project",
-      challenge: "This was my challenge",
-      solution: "This is how I solve the issue",
-      technologies: ["/icons/react.svg", "/icons/typescript.svg"],
-    },
-  ];
+import projects from "../constants/projects.json";
+import Container from "./Container";
+import ProjectItem from "./ProjectItem";
 
+export default function Projects() {
   return (
     <section id="projects" className="py-16">
-      <div className="container mx-auto px-4 flex flex-col items-center">
-        <h3>&lt;PROJECTS&gt;</h3>
-        <div>
-          {projects.map((project) => {
-            return <div key={project.id}>{project.title}</div>;
-          })}
+      <Container>
+        <h2 className="text-[clamp(2.5rem, 5vw + 1rem, 4rem)] text-center mb-4">
+          &lt;PROJECTS&gt;
+        </h2>
+        <div className="flex flex-col gap-4">
+          {projects.map((project) => (
+            <ProjectItem key={project.id} project={project} />
+          ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }
