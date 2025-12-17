@@ -1,0 +1,122 @@
+{
+  "personal": {
+    "name": "Maurice Filiatreault",
+    "title": "Full Stack Developer",
+    "location": "Canada, Alberta",
+    "email": "inbox@mauricefh.com",
+    "bio": "My main stack is React, TypeScript and Node.js. I’m a big fan of Helix Editor and Ghostty Terminal to keeping my workflow smooth and minimalist.",
+    "social": {
+      "github": "https://github.com/mauricefh",
+      "linkedin": "https://linkedin.com/in/mauricefh",
+      "instagram": "https://instagram.com/mauricefh.dev"
+    }
+  },
+  "projects": [
+    {
+      "id": 1,
+      "title": "Project Name",
+      "summary": "Brief project description",
+      "media": {
+        "type": "video",
+        "src": "/projects/project1.mp4"
+      },
+      "techStack": [
+        "React",
+        "Node.js",
+        "PostgreSQL"
+      ],
+      "challenge": "What problem did this solve?",
+      "solution": "How did you solve it?",
+      "impact": "What was the result?",
+      "links": {
+        "demo": "https://demo.example.com",
+        "github": "https://github.com/yourusername/project"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Another Project",
+      "summary": "Another project description",
+      "media": {
+        "type": "image",
+        "src": "/projects/project2.png"
+      },
+      "techStack": [
+        "TypeScript",
+        "Astro",
+        "Tailwind"
+      ],
+      "challenge": "Challenge description",
+      "solution": "Solution description",
+      "impact": "Impact description",
+      "links": {
+        "demo": "https://demo2.example.com",
+        "github": "https://github.com/yourusername/project2"
+      }
+    }
+  ],
+  "skills": [
+    {
+      "icon": "devicon:html5",
+      "name": "HTML"
+    },
+    {
+      "icon": "devicon:css3",
+      "name": "CSS"
+    },
+    {
+      "icon": "devicon:javascript",
+      "name": "JavaScript"
+    },
+    {
+      "icon": "devicon:typescript",
+      "name": "TypeScript"
+    },
+    {
+      "icon": "devicon:react",
+      "name": "React"
+    },
+    {
+      "icon": "devicon:nextjs",
+      "name": "Next.js"
+    },
+    {
+      "icon": "devicon:astro",
+      "name": "Astro"
+    },
+    {
+      "icon": "devicon:nodejs",
+      "name": "Node.js"
+    },
+    {
+      "icon": "devicon:tailwindcss",
+      "name": "Tailwind CSS"
+    },
+    {
+      "icon": "devicon:postgresql",
+      "name": "PostgreSQL"
+    },
+    {
+      "icon": "devicon:prisma",
+      "name": "Prisma ORM"
+    },
+    {
+      "icon": "devicon:supabase",
+      "name": "Supabase"
+    },
+    {
+      "customIcon": "/icons/tanstack.png",
+      "name": "TanStack Start"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What's your preferred tech stack?",
+      "answer": "I love working with modern web technologies like React, TypeScript, and Astro."
+    },
+    {
+      "question": "Are you available for work?",
+      "answer": "Yes! Feel free to reach out via email."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  icon?: string;
+  customIcon?: string;
+  name: string;
+}
+
+const { icon, customIcon, name } = Astro.props;
+---
+
+<div class="flex items-center gap-3 px-6">
+  {
+    customIcon ? (
+      <img
+        src={customIcon}
+        alt={`${name} icon`}
+        class="h-10 w-auto object-contain transition-transform group-hover:scale-110"
+      />
+    ) : icon ? (
+      <Icon
+        name={icon}
+        class="h-10 w-auto object-contain transition-transform group-hover:scale-110"
+      />
+    ) : null
+  }
+  <span class="text-xl font-medium text-white whitespace-nowrap">{name}</span>
+</div>

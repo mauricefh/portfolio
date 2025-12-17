@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "Project Name",
+    "summary": "Brief project description",
+    "media": {
+      "type": "video",
+      "src": "/projects/project1.mp4"
+    },
+    "techStack": [
+      "React",
+      "Node.js",
+      "PostgreSQL"
+    ],
+    "challenge": "What problem did this solve?",
+    "solution": "How did you solve it?",
+    "impact": "What was the result?",
+    "links": {
+      "demo": "https://demo.example.com",
+      "github": "https://github.com/yourusername/project"
+    }
+  },
+  {
+    "id": 2,
+    "title": "Another Project",
+    "summary": "Another project description",
+    "media": {
+      "type": "image",
+      "src": "/projects/project2.png"
+    },
+    "techStack": [
+      "TypeScript",
+      "Astro",
+      "Tailwind"
+    ],
+    "challenge": "Challenge description",
+    "solution": "Solution description",
+    "impact": "Impact description",
+    "links": {
+      "demo": "https://demo2.example.com",
+      "github": "https://github.com/yourusername/project2"
+    }
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "icon": "devicon:html5",
+    "name": "HTML"
+  },
+  {
+    "icon": "devicon:css3",
+    "name": "CSS"
+  },
+  {
+    "icon": "devicon:javascript",
+    "name": "JavaScript"
+  },
+  {
+    "icon": "devicon:typescript",
+    "name": "TypeScript"
+  },
+  {
+    "icon": "devicon:react",
+    "name": "React"
+  },
+  {
+    "icon": "devicon:nextjs",
+    "name": "Next.js"
+  },
+  {
+    "icon": "devicon:astro",
+    "name": "Astro"
+  },
+  {
+    "icon": "devicon:nodejs",
+    "name": "Node.js"
+  },
+  {
+    "icon": "devicon:tailwindcss",
+    "name": "Tailwind CSS"
+  },
+  {
+    "icon": "devicon:postgresql",
+    "name": "PostgreSQL"
+  },
+  {
+    "icon": "devicon:prisma",
+    "name": "Prisma ORM"
+  },
+  {
+    "icon": "devicon:supabase",
+    "name": "Supabase"
+  },
+  {
+    "customIcon": "/icons/tanstack.png",
+    "name": "TanStack Start"
+  }
+]
