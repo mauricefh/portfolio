@@ -11,6 +11,6 @@
 		"directory": "./dist"
 	},
 	"observability": {
-    "enabled": true
-  }
+		"enabled": true
+	}
 }
