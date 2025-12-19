@@ -1,31 +1,43 @@
 ---
 import personal from "../data/personal.json";
 import SocialLinks from "./SocialLinks.astro";
+import AvailabilityStatus from "./AvailabilityStatus.astro";
 
 const background_video = "/background.webm";
 const background_fallback = "/background-fallback.avif";
 ---
 
-<main class="flex flex-col gap-8 bg-mono-black px-4 py-8 lg:px-48 xl:flex-row">
+<section
+  class="flex flex-col gap-8 bg-mono-black px-4 py-8 lg:px-48 xl:flex-row"
+>
   <!-- text -->
-  <div class="flex flex-col justify-around gap-4 lg:gap-4 xl:w-1/2">
+  <div class="flex flex-col justify-around gap-4 xl:w-1/2">
     <div class="flex flex-col">
-      <h1 class="leading-12">{personal.name}</h1>
+      <h1>{personal.name}</h1>
       <h2>{personal.title}</h2>
       <p class="xl:max-w-lg">{personal.bio}</p>
     </div>
-    <SocialLinks />
+    <div class="flex flex-col gap-4 xl:flex-row xl:items-center">
+      <SocialLinks />
+      <AvailabilityStatus />
+    </div>
   </div>
   <!-- video -->
   <div class="grid place-content-center xl:w-1/2">
     <video
-      class="h-full w-full rounded-md border border-accent"
+      class="h-full w-full rounded-md"
       poster={background_fallback}
       controls
       controlslist="nodownload noremoteplayback noplaybackrate disablepictureinpicture"
+      preload="metadata"
     >
       <source src={background_video} type="video/webm" />
-      <img src={background_fallback} alt="Description of video content" />
+      <img
+        src={background_fallback}
+        alt="Description of video content"
+        loading="lazy"
+        decoding="async"
+      />
     </video>
   </div>
-</main>
+</section>

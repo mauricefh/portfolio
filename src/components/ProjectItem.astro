@@ -1,5 +1,6 @@
 ---
 import Tag from "./Tag.astro";
+import { Icon } from "astro-icon/components";
 const {
   id,
   title,
@@ -20,14 +21,21 @@ const {
 >
   <!-- gallery -->
   <div class="w-full border border-accent">
-    <img src={medias[0]} alt="image" />
+    <img
+      src={medias[0]}
+      alt={`${title} project screenshot`}
+      loading="lazy"
+      decoding="async"
+    />
   </div>
 
   <!-- title, summary -->
   <div>
-    <h2 class="text-mono-black">{title}</h2>
-    <p class="text-mono-600">{summary}</p>
-    <span class="text-mono-800"><strong>Status:</strong> {status}</span>
+    <h2 class="text-on-light-heading">{title}</h2>
+    <p class="text-on-light-body">{summary}</p>
+    <span class="text-on-light-muted">
+      <strong class="text-on-light-strong">Status:</strong> {status}
+    </span>
   </div>
 
   <!-- tags -->
@@ -38,26 +46,40 @@ const {
   <!-- challenge, solution, impact -->
   <div>
     <details>
-      <summary>Challenge, Solution and Impact</summary>
+      <summary class="text-on-light-muted">Challenge, Solution and Impact</summary>
       <div class="flex flex-col">
-        <strong>Challenge</strong>
-        <p class="text-mono-500">{challenge}</p>
-        <strong>Solution</strong>
-        <p class="text-mono-500">{solution}</p>
-        <strong>Impact</strong>
-        <p class="text-mono-500">{impact}</p>
+        <strong class="text-on-light-strong">Challenge</strong>
+        <p class="text-on-light-body">{challenge}</p>
+        <strong class="text-on-light-strong">Solution</strong>
+        <p class="text-on-light-body">{solution}</p>
+        <strong class="text-on-light-strong">Impact</strong>
+        <p class="text-on-light-body">{impact}</p>
       </div>
     </details>
   </div>
 
   <!-- button source & demo -->
   <div class="flex gap-4">
-    <button class="button-base button-fill">
-      <a href={source_url} title="Github project link">Github</a>
-    </button>
+    <a
+      href={source_url}
+      title="Github project link"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="button-base button-fill flex items-center gap-2"
+    >
+      <Icon name="mdi:github" class="h-5 w-5" />
+      <span>Github</span>
+    </a>
 
-    <button class="button-base button-outline">
-      <a href={demo_url} title="Demo project link">Demo</a>
-    </button>
+    <a
+      href={demo_url}
+      title="Demo project link"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="button-base button-outline flex items-center gap-2"
+    >
+      <Icon name="lucide:external-link" class="h-5 w-5" />
+      <span>Demo</span>
+    </a>
   </div>
 </div>

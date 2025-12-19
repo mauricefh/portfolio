@@ -4,6 +4,7 @@
   "location": "Canada, Alberta",
   "email": "inbox@mauricefh.com",
   "bio": "Hi! I'm a full-stack developer working primarily with React, TypeScript, and Node.js. I focus on building web applications with user experience at the core balancing clean interfaces with solid technical implementation. I keep my development workflow minimal and efficient using tools like Helix and Ghostty, which helps me stay focused on solving problems rather than fighting my environment.",
+  "availability_status": "available",
   "social": {
     "github": "https://github.com/mauricefh",
     "linkedin": "https://linkedin.com/in/mauricefh",

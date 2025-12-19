@@ -31,6 +31,14 @@
   /* Custom spacing (if needed beyond defaults) */
   --spacing-18: 4.5rem;
   --spacing-88: 22rem;
+
+  /* Spacing Scale - Standard Tailwind spacing */
+  /* gap-2: 8px - Tags, small elements */
+  /* gap-4: 16px - Standard component spacing */
+  /* gap-8: 32px - Section spacing */
+  /* p-4: 16px - Standard card/FAQ padding */
+  /* px-4 py-8: Standard section padding */
+  /* lg:px-48: Large screen horizontal padding (192px) */
 }
 
 @layer base {
@@ -46,14 +54,20 @@
   h1 {
     color: var(--color-mono-white);
     font-size: var(--text-5xl);
+    font-weight: 600; /* semibold */
+    line-height: 1.2;
   }
   h2 {
     color: var(--color-mono-100);
-    font-size: var(--text-2xl);
+    font-size: var(--text-3xl);
+    font-weight: 500; /* medium */
+    line-height: 1.3;
   }
   h3 {
     color: var(--color-mono-200);
-    font-size: var(--text-2xl);
+    font-size: var(--text-xl);
+    font-weight: 400; /* normal */
+    line-height: 1.4;
   }
   p {
     color: var(--color-mono-300);
@@ -76,6 +90,30 @@
       color: var(--color-accent-hover);
     }
   }
+
+  summary {
+    cursor: pointer;
+  }
+
+  /* Keyboard navigation focus states */
+  a:focus-visible,
+  button:focus-visible,
+  summary:focus-visible,
+  details:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Remove default focus outline */
+  *:focus {
+    outline: none;
+  }
+
+  /* Only show custom outline on keyboard focus */
+  *:focus:not(:focus-visible) {
+    outline: none;
+  }
 }
 
 @layer components {
@@ -86,17 +124,61 @@
     @apply text-mono-white transition-colors hover:text-accent-hover;
   }
   .button-base {
-    @apply border px-1 py-2 border rounded-md;
+    @apply border px-4 py-2 border rounded-md transition-colors;
   }
   .button-fill {
-    @apply bg-accent;
+    @apply bg-accent text-mono-white;
+
+    & a {
+      color: var(--color-mono-white);
+      text-decoration: none;
+    }
+
+    &:hover {
+      background-color: var(--color-accent-hover);
+    }
   }
   .button-outline {
-    @apply border-accent;
+    @apply border-accent text-accent;
+
+    & a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    &:hover {
+      background-color: var(--color-accent);
+      color: var(--color-mono-white);
+
+      & a {
+        color: var(--color-mono-white);
+      }
+    }
   }
 }
 
 @layer utilities {
+  /* Text colors for light backgrounds - WCAG AA/AAA compliant */
+  .text-on-light-heading {
+    color: var(--color-mono-900); /* 14.8:1 on white - AAA */
+  }
+  .text-on-light-body {
+    color: var(--color-mono-800); /* 12.6:1 on white - AAA */
+  }
+  .text-on-light-muted {
+    color: var(--color-mono-700); /* 8.6:1 on white - AAA */
+  }
+  .text-on-light-strong {
+    color: var(--color-mono-black); /* 19.6:1 on white - AAA */
+  }
+
+  /* Text colors for dark backgrounds */
+  .text-on-dark-heading {
+    color: var(--color-mono-100); /* 9.3:1 on mono-600 - AAA */
+  }
+  .text-on-dark-body {
+    color: var(--color-mono-300); /* 6.4:1 on mono-700 - AAA */
+  }
 }
 
 html,
