@@ -14,7 +14,7 @@ export default defineConfig({
   vite: {
     build: {
       cssCodeSplit: true,
-      inlineStylesheets: "auto", // inline small css file
+      inlineStylesheets: "always", // inline small css file
     },
     plugins: [tailwindcss()],
   },
