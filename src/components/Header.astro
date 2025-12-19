@@ -28,18 +28,13 @@ const background_fallback = "/background-fallback.avif";
     <video
       class="h-full w-full rounded-md"
       poster={background_fallback}
+      fetchpriority="high"
       controls
       controlslist="nodownload noremoteplayback noplaybackrate disablepictureinpicture"
       preload="metadata"
     >
       <source src={background_video} type="video/webm" />
-      <img
-        src={background_fallback}
-        alt="Description of video content"
-        loading="lazy"
-        decoding="async"
-        fetchpriority="high"
-      />
+      <img src={background_fallback} alt="Description of video content" />
     </video>
   </div>
 </section>

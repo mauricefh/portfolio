@@ -12,6 +12,10 @@ export default defineConfig({
   integrations: [icon(), sitemap()],
 
   vite: {
+    build: {
+      cssCodeSplit: true,
+      inlineStylesheets: "auto", // inline small css file
+    },
     plugins: [tailwindcss()],
   },
 
