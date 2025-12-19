@@ -1,0 +1,27 @@
+[
+  {
+    "text": "About",
+    "title": "About",
+    "href": "#about"
+  },
+  {
+    "text": "Experiences",
+    "title": "Experiences",
+    "href": "#experiences"
+  },
+  {
+    "text": "Projects",
+    "title": "Projects",
+    "href": "#projects"
+  },
+  {
+    "text": "Skills",
+    "title": "Skills",
+    "href": "#skills"
+  },
+  {
+    "text": "FAQ",
+    "title": "FAQ",
+    "href": "#faq"
+  }
+]

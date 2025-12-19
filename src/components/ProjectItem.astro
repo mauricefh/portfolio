@@ -1,0 +1,63 @@
+---
+import Tag from "./Tag.astro";
+const {
+  id,
+  title,
+  summary,
+  tags,
+  challenge,
+  solution,
+  impact,
+  source_url,
+  demo_url,
+  medias,
+  status,
+} = Astro.props;
+---
+
+<div
+  class="flex min-h-[250px] min-w-[300px] flex-col gap-4 rounded-md border bg-mono-white p-4"
+>
+  <!-- gallery -->
+  <div class="w-full border border-accent">
+    <img src={medias[0]} alt="image" />
+  </div>
+
+  <!-- title, summary -->
+  <div>
+    <h2 class="text-mono-black">{title}</h2>
+    <p class="text-mono-600">{summary}</p>
+    <span class="text-mono-800"><strong>Status:</strong> {status}</span>
+  </div>
+
+  <!-- tags -->
+  <div class="mt-4 flex flex-wrap gap-2">
+    {tags.map((item: string) => <Tag title={item} />)}
+  </div>
+
+  <!-- challenge, solution, impact -->
+  <div>
+    <details>
+      <summary>Challenge, Solution and Impact</summary>
+      <div class="flex flex-col">
+        <strong>Challenge</strong>
+        <p class="text-mono-500">{challenge}</p>
+        <strong>Solution</strong>
+        <p class="text-mono-500">{solution}</p>
+        <strong>Impact</strong>
+        <p class="text-mono-500">{impact}</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- button source & demo -->
+  <div class="flex gap-4">
+    <button class="button-base button-fill">
+      <a href={source_url} title="Github project link">Github</a>
+    </button>
+
+    <button class="button-base button-outline">
+      <a href={demo_url} title="Demo project link">Demo</a>
+    </button>
+  </div>
+</div>

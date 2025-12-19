@@ -4,158 +4,126 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal portfolio website showcasing projects and skills through a modern, visually engaging single-page application with video background.
-
-## Tech Stack
-
-- **Framework**: Astro v5 (static site generator with islands architecture)
-- **Styling**: Tailwind CSS v4 (via @tailwindcss/vite plugin)
-- **Icons**: astro-icon (with Iconify icon sets)
-- **Package Manager**: pnpm
-- **Language**: TypeScript (strict mode)
-- **Component Variants**: tailwind-variants
-- **Code Formatting**: Prettier with prettier-plugin-astro
+This is a personal portfolio website built with Astro, showcasing projects, work experience, skills, and professional information. The site is content-driven with data stored in JSON files and rendered through Astro components.
 
 ## Commands
 
-All commands run from the project root:
-
+### Development
 ```bash
 pnpm install          # Install dependencies
 pnpm dev              # Start dev server at localhost:4321
 pnpm build            # Build production site to ./dist/
 pnpm preview          # Preview production build locally
-pnpm astro ...        # Run Astro CLI commands (e.g., astro check)
 ```
 
-## Project Structure
-
-```
-/
-├── public/                    # Static assets served as-is
-│   ├── favicon.svg
-│   ├── background.webm        # Hero video background (7.2MB)
-│   └── background-fallback.webp  # Video fallback image
-├── src/
-│   ├── components/            # Reusable Astro components
-│   │   └── Header.astro       # Hero section with video
-│   ├── data/                  # JSON data files
-│   │   └── portfolio.json     # Portfolio content (personal info, projects, skills, FAQ)
-│   ├── layouts/               # Page layouts
-│   │   └── Layout.astro       # Base HTML structure
-│   ├── pages/                 # File-based routing (each .astro = route)
-│   │   └── index.astro        # Homepage
-│   └── styles/
-│       └── global.css         # Global styles + Tailwind import
-├── astro.config.mjs           # Astro configuration
-└── tsconfig.json              # TypeScript config (extends astro/tsconfigs/strict)
+### Formatting
+```bash
+pnpm prettier --write .  # Format all files with Prettier
 ```
 
-## Architecture
+Note: Uses pnpm as the package manager. The project includes Prettier with Astro and Tailwind CSS plugins configured.
 
-### Astro Framework
-- **Single-page application** - no client-side routing needed
-- **Islands Architecture** - components are static by default, add interactivity explicitly
-- **File-based routing** - `src/pages/` maps to URLs (`index.astro` → `/`)
-- **Zero JS by default** - Astro ships no JavaScript unless needed
+## Architecture & Structure
 
-### Current Implementation
+### Data-Driven Content System
 
-**Data Layer** (`src/data/portfolio.json`):
-- Single source of truth for all portfolio content
-- Imported directly in Astro frontmatter (no client JS needed)
-- Structure:
-  - `personal`: Name, title, location, bio, social links
-  - `projects`: Array of project objects with media, tech stack, challenge/solution/impact
-  - `skills`: Array of skill strings
-  - `faq`: Array of question/answer objects
+All content is defined in JSON files under `src/data/`:
+- `personal.json` - Personal info, bio, social links
+- `experiences.json` - Work experience entries with company, role, bullets, tags
+- `projects.json` - Project portfolio with challenge/solution/impact format
+- `skills.json` - Technical skills categorization
+- `faq.json` - FAQ items
+- `navigation.json` - Navigation menu items
 
-**Header Component** (`src/components/Header.astro`):
-- Full-screen video background with:
-  - WebM video from `public/` directory
-  - Fallback poster image
-  - Autoplay, muted, loop, playsinline attributes
-- Hero content overlay displaying personal info from JSON data
-- Centered text layout with responsive padding
+Each JSON file follows a specific schema that maps to corresponding Astro components. When adding or modifying content, update the relevant JSON file rather than hardcoding values in components.
 
-**Layout** (`src/layouts/Layout.astro`):
-- Base HTML structure with proper meta tags
-- Title: "Portfolio | Mauricefh"
-- Global CSS imported once at layout level
+### Component Organization
 
-### Styling with Tailwind v4
+**Layout Components:**
+- `src/layouts/Layout.astro` - Base HTML structure with fonts and meta tags
+- `src/pages/index.astro` - Main page composition (imports and arranges all sections)
 
-- Import Tailwind via `@import "tailwindcss"` in CSS (v4 syntax)
-- Tailwind integrated through Vite plugin (configured in `astro.config.mjs`)
-- Use `tailwind-variants` for creating component variants with TypeScript support
-- Full Tailwind utility classes available in `.astro` files
+**Section Components:**
+- `Header.astro` - Hero section with bio and video background (50/50 split layout)
+- `Experience.astro` - Work experience timeline
+- `Projects.astro` - Project showcase gallery
+- `Skills.astro` - Technical skills display
+- `FAQ.astro` - Frequently asked questions
+- `Footer.astro` - Footer with additional links
 
-## Development Guidelines
+**Atomic Components:**
+- `ExperienceItem.astro` - Individual experience card
+- `ProjectItem.astro` - Individual project card with gallery
+- `Gallery.astro` + `GalleryControls.astro` - Image carousel system
+- `Tag.astro` - Technology/skill tag badge
+- `IconText.astro` - Icon + text combination component
+- `SocialLinks.astro` - Social media link group
+- `FAQItem.astro` - Individual FAQ accordion item
 
-### Component Development
-- Prefer `.astro` components for static content (no client JS)
-- Add framework components (React/Vue/etc.) only when interactivity is required
-- Use Astro's component props with TypeScript interfaces in frontmatter
+### Styling System
 
-### Data Management Pattern
-- **JSON data files** in `src/data/` directory
-- Import JSON directly in component frontmatter: `import data from "../data/portfolio.json"`
-- Data is processed at build time - zero JavaScript sent to client
-- Update portfolio content by editing JSON file (no code changes needed)
-- TypeScript will validate JSON structure if you create interfaces
+The project uses Tailwind CSS v4 with a custom theme defined in `src/styles/global.css`:
 
-Example usage:
-```astro
----
-import data from "../data/portfolio.json";
-const { personal, projects } = data;
----
-<h1>{personal.name}</h1>
-{projects.map(project => <div>{project.title}</div>)}
-```
+**Color System:**
+- Monochrome scale: `mono-black`, `mono-900` through `mono-100`, `mono-white`
+- Accent colors: `accent`, `accent-hover`, `accent-light`
+- Status colors: `status-available`, `status-open`, `status-unavailable`
 
-### Asset Handling
-- **Large files (videos)** → `public/` for direct serving (not processed)
-- **Optimized images** → `src/assets/` for Astro's image optimization
-- **Static files** → `public/` (e.g., favicon, fallback images)
-- Reference public files as URL strings: `"/background.webm"`
-- Reference assets imports with `.src` property: `import img from "../assets/logo.png"` → `{img.src}`
+**Typography:**
+- Sans-serif: Inter (via Google Fonts)
+- Monospace: JetBrains Mono (via Google Fonts)
+- Custom heading styles (h1-h6) defined in base layer
+- Utility classes for buttons: `button-base`, `button-fill`, `button-outline`
 
-### Styling Patterns
-- Global styles in `src/styles/global.css`
-- Component-specific styles in `<style>` tags within `.astro` files
-- Prefer Tailwind utilities; use custom CSS only when necessary
-- Scoped styles by default in Astro components
+### Icon System
 
-### Icon Usage
+Uses `astro-icon` integration with multiple icon sets:
+- `@iconify-json/devicon` - Development tool icons
+- `@iconify-json/logos` - Brand logos
+- `@iconify-json/lucide` - General UI icons
+- `@iconify-json/mdi` - Material Design icons
+- `@iconify-json/simple-icons` - Simple brand icons
 
-**Using astro-icon with Iconify:**
-```astro
----
-import { Icon } from "astro-icon/components";
----
-<Icon name="mdi:github" class="w-6 h-6" />
-```
+Icons are referenced by collection:name format (e.g., `lucide:github`).
 
-**Popular icon collections:**
-- `mdi:` - Material Design Icons (most comprehensive)
-- `lucide:` - Lucide Icons (modern, minimal)
-- `simple-icons:` - Brand/logo icons (GitHub, React, etc.)
-- `heroicons:` - Heroicons (Tailwind UI style)
+### Media Assets
 
-**Finding icons:**
-- Browse all icons at https://icon-sets.iconify.design/
-- Examples: `mdi:github`, `mdi:linkedin`, `mdi:email`, `simple-icons:react`, `simple-icons:typescript`
+Public assets include:
+- `/background.webm` - Hero section video background
+- `/background-fallback.avif` - Video poster/fallback image
+- `/avatar.avif` - Profile image
+- Company/project logos in `/public/` directory
+- Placeholder images for projects in development
 
-**Best practices:**
-- Icons render as inline SVG (no JavaScript, fully styleable with CSS)
-- Use consistent size classes: `w-6 h-6`, `w-8 h-8`
-- Add `aria-label` to icon-only buttons/links for accessibility
-- Use semantic color classes from Tailwind
+## Important Patterns
 
-### Performance Considerations
-- Video elements: Use optimized formats (WebM), include poster images
-- Images: Leverage Astro's built-in image optimization
-- Icons: astro-icon renders static SVG at build time (zero runtime JS)
-- Lazy loading: Consider for below-the-fold media
-- Font loading: Optimize web font delivery if custom fonts are added
+### Project Data Schema
+
+Projects in `projects.json` follow this structure:
+- Basic info: title, summary, tags[], status
+- Problem-solving narrative: challenge, solution, impact
+- Links: source_url, demo_url
+- Media: medias[] array for gallery images
+- Each project demonstrates a technical learning or business problem solved
+
+### Experience Data Schema
+
+Work experiences in `experiences.json` include:
+- Company details: title, company, company_website, location, date
+- Bullet points focusing on measurable impact
+- Tags for technologies used
+
+### Responsive Design
+
+The layout uses a mobile-first approach with breakpoints:
+- Mobile: Single column, stacked sections
+- Desktop (xl): Header uses 50/50 split for text/video
+- Padding scales: `px-4` mobile → `lg:px-48` desktop
+
+### Content Philosophy
+
+Based on `projects.json` structure, this portfolio emphasizes:
+1. Visual demonstrations (videos/images first)
+2. Problem → Solution → Impact narrative
+3. Concrete technical learnings over vague descriptions
+4. Recruiter-optimized for quick scanning (6-8 second rule)

@@ -1,9 +1,9 @@
 {
   "name": "Maurice Filiatreault",
-  "title": "Full Stack Developer",
+  "title": "Full Stack Engineer",
   "location": "Canada, Alberta",
   "email": "inbox@mauricefh.com",
-  "bio": "My main stack is React, TypeScript and Node.js. I’m a big fan of Helix Editor and Ghostty Terminal to keeping my workflow smooth and minimalist.",
+  "bio": "Hi! I'm a full-stack developer working primarily with React, TypeScript, and Node.js. I focus on building web applications with user experience at the core balancing clean interfaces with solid technical implementation. I keep my development workflow minimal and efficient using tools like Helix and Ghostty, which helps me stay focused on solving problems rather than fighting my environment.",
   "social": {
     "github": "https://github.com/mauricefh",
     "linkedin": "https://linkedin.com/in/mauricefh",

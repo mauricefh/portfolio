@@ -33,8 +33,79 @@
   --spacing-88: 22rem;
 }
 
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--color-mono-white);
+    font-family: var(--font-family-sans);
+  }
+  h1 {
+    color: var(--color-mono-white);
+    font-size: var(--text-5xl);
+  }
+  h2 {
+    color: var(--color-mono-100);
+    font-size: var(--text-2xl);
+  }
+  h3 {
+    color: var(--color-mono-200);
+    font-size: var(--text-2xl);
+  }
+  p {
+    color: var(--color-mono-300);
+    font-family: var(--font-family-sans);
+  }
+  span {
+    color: var(--color-mono-500);
+    font-family: var(--font-family-sans);
+  }
+  ul {
+    color: var(--color-mono-300);
+    list-style-type: disc;
+    margin-left: 16px;
+  }
+  a {
+    text-decoration: underline 1px var(--color-accent);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--color-accent-hover);
+    }
+  }
+}
+
+@layer components {
+  .card {
+    background-color: var(--color-white);
+  }
+  .social-link {
+    @apply text-mono-white transition-colors hover:text-accent-hover;
+  }
+  .button-base {
+    @apply border px-1 py-2 border rounded-md;
+  }
+  .button-fill {
+    @apply bg-accent;
+  }
+  .button-outline {
+    @apply border-accent;
+  }
+}
+
+@layer utilities {
+}
+
 html,
 body {
+  /* max-width: 1440px; */
   width: 100%;
   height: 100%;
+  /* background-color: var(--color-mono-900); */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
 }

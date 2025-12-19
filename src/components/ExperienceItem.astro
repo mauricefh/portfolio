@@ -1,0 +1,31 @@
+---
+import Tag from "./Tag.astro";
+const {
+  title,
+  company,
+  company_website,
+  company_website_title,
+  date,
+  location,
+  bullets,
+  tags,
+} = Astro.props;
+---
+
+<div>
+  <h2>
+    {title} at <a
+      href={company_website}
+      title={company_website_title}
+      target="_blank">{company}</a
+    >
+  </h2>
+  <span>{date}</span>
+  <span>{location}</span>
+  <ul>
+    {bullets.map((item: string) => <li>{item}</li>)}
+  </ul>
+  <div class="mt-4 flex flex-wrap gap-2">
+    {tags.map((item: string) => <Tag title={item} />)}
+  </div>
+</div>

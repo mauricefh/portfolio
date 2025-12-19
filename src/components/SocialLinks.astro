@@ -3,39 +3,35 @@ import { Icon } from "astro-icon/components";
 import personal from "../data/personal.json";
 ---
 
-<div class="flex gap-4 mt-6">
+<div class="flex gap-4">
   <a
     href={personal.social.github}
     target="_blank"
     rel="noopener noreferrer"
-    class="text-white hover:text-white/80 transition-colors"
+    class="social-link"
     aria-label="GitHub"
   >
-    <Icon name="mdi:github" class="w-8 h-8" />
+    <Icon name="mdi:github" class="h-8 w-8" />
   </a>
   <a
     href={personal.social.linkedin}
     target="_blank"
     rel="noopener noreferrer"
-    class="text-white hover:text-white/80 transition-colors"
+    class="social-link"
     aria-label="LinkedIn"
   >
-    <Icon name="mdi:linkedin" class="w-8 h-8" />
+    <Icon name="mdi:linkedin" class="h-8 w-8" />
   </a>
   <a
     href={personal.social.instagram}
     target="_blank"
     rel="noopener noreferrer"
-    class="text-white hover:text-white/80 transition-colors"
+    class="social-link"
     aria-label="Instagram"
   >
-    <Icon name="mdi:instagram" class="w-8 h-8" />
+    <Icon name="mdi:instagram" class="h-8 w-8" />
   </a>
-  <a
-    href={`mailto:${personal.email}`}
-    class="text-white hover:text-white/80 transition-colors"
-    aria-label="Email"
-  >
-    <Icon name="mdi:email" class="w-8 h-8" />
+  <a href={`mailto:${personal.email}`} class="social-link" aria-label="Email">
+    <Icon name="mdi:email" class="h-8 w-8" />
   </a>
 </div>

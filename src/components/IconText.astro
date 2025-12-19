@@ -5,12 +5,13 @@ interface Props {
   icon?: string;
   customIcon?: string;
   name: string;
+  class?: string;
 }
 
 const { icon, customIcon, name } = Astro.props;
 ---
 
-<div class="flex items-center gap-3 px-6">
+<div class={`flex items-center gap-3`}>
   {
     customIcon ? (
       <img
@@ -25,5 +26,5 @@ const { icon, customIcon, name } = Astro.props;
       />
     ) : null
   }
-  <span class="text-xl font-medium text-white whitespace-nowrap">{name}</span>
+  <span class="text-xl font-medium whitespace-nowrap text-white">{name}</span>
 </div>

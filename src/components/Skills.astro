@@ -1,0 +1,23 @@
+---
+import skills from "../data/skills.json";
+import IconText from "./IconText.astro";
+---
+
+<main class="flex flex-col gap-8 bg-mono-900 px-4 py-8 lg:px-48">
+  <h1>Skills</h1>
+
+  <div
+    class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
+  >
+    {
+      skills.map((item) => (
+        <IconText
+          name={item.name}
+          icon={item.icon}
+          customIcon={item.customIcon}
+          class="px-0"
+        />
+      ))
+    }
+  </div>
+</main>

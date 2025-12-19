@@ -1,0 +1,43 @@
+[
+  {
+    "title": "Software Engineer",
+    "company": "3wDesign inc.",
+    "company_website": "https://www.3wdesign.ca/",
+    "company_website_title": "3wDesign inc website link",
+    "date": "2022 - 2023",
+    "location": "(Remote) Montreal, Canada",
+    "bullets": [
+      "Modernized legacy jQuery to React.js, reducing feature delivery timelines",
+      "Transitioned version control from TortoiseSVN to Git, improving team workflows",
+      "Developed EPR system to manage day-to-day operations for client"
+    ],
+    "tags": [
+      "JavaScript",
+      "React",
+      "jQuery",
+      "Git",
+      "TortoiseSVN"
+    ]
+  },
+  {
+    "title": "Back-end Developer",
+    "company": "House of Commons",
+    "company_website": "https://www.ourcommons.ca/en",
+    "company_website_title": "House of Commons website link",
+    "date": "2021 - 2022",
+    "location": "(On-site) Ottawa, Canada",
+    "bullets": [
+      "Strengthened security with role-based authentication APIs in .NET Core, reducing unauthorized access",
+      "Improved deployment reliability with GitHub Actions and Docker pipelines, reducing deployment issues",
+      "Enhanced code quality with unit/integration testing, catching critical regressions pre-production"
+    ],
+    "tags": [
+      ".NET Core",
+      "C#",
+      "GitHub Actions",
+      "Docker",
+      "CI/CD",
+      "Unit Testing"
+    ]
+  }
+]
