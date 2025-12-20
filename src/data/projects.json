@@ -67,29 +67,6 @@
   },
   {
     "id": 4,
-    "title": "Freenance",
-    "summary": "A Progressive Web App designed to help users break the paycheck-to-paycheck cycle through forward-allocation budgeting, calculating 'safe to spend' amounts while automatically reserving money for upcoming bills and financial obligations.",
-    "tags": [
-      "TypeScript",
-      "React",
-      "React router",
-      "PostgreSQL",
-      "Prisma ORM",
-      "Supabase",
-      "Service Worker"
-    ],
-    "challenge": "Traditional budgeting tools show total account balances, which doesn't help users understand how much they can actually spend without jeopardizing upcoming bills. This creates anxiety and poor spending decisions.",
-    "solution": "Implemented a forward-allocation engine that calculates 'safe to spend' amounts by proactively reserving money for future bills based on their due dates and frequencies. Users see at a glance what's truly available versus what's already committed, breaking the psychological trap of spending based on current balance.",
-    "impact": "Deep dive into PWA architecture including service workers, caching strategies, and offline-first design patterns",
-    "source_url": "https://github.com/mauricefh/freenance",
-    "demo_url": "",
-    "medias": [
-      "/placeholder.jpg"
-    ],
-    "status": "Design"
-  },
-  {
-    "id": 5,
     "title": "Portfolio",
     "summary": "A recruiter-optimized portfolio website showcasing development work through video demonstrations and strategic presentation, designed to maximize engagement and communicate technical capabilities within the first critical seconds of a recruiter's visit.",
     "tags": [
