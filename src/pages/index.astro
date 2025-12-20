@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
+import Banner from "../components/Banner.astro";
 import Header from "../components/Header.astro";
 import Experience from "../components/Experience.astro";
 import Projects from "../components/Projects.astro";
@@ -10,7 +11,8 @@ import Footer from "../components/Footer.astro";
 ---
 
 <Layout>
-  <main>
+  <main class="relative">
+    <Banner />
     <Header />
     <Experience />
     <Projects />
