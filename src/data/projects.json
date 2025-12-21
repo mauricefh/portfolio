@@ -56,15 +56,18 @@
     "medias": [
       {
         "type": "image",
-        "url": "/helhest_cane_corso/1.png"
+        "url": "/helhest_cane_corso/1-thumb.png",
+        "full_url": "/helhest_cane_corso/1.png"
       },
       {
         "type": "image",
-        "url": "/helhest_cane_corso/2.png"
+        "url": "/helhest_cane_corso/2-thumb.png",
+        "full_url": "/helhest_cane_corso/2.png"
       },
       {
         "type": "image",
-        "url": "/helhest_cane_corso/3.png"
+        "url": "/helhest_cane_corso/3-thumb.png",
+        "full_url": "/helhest_cane_corso/3.png"
       }
     ],
     "status": "Completed"
@@ -80,7 +83,33 @@
     "impact": "Practiced content strategy and information design, learning to balance showing enough depth to prove competence while maintaining scanability for time-constrained viewers",
     "source_url": "https://github.com/mauricefh/portfolio",
     "demo_url": "#",
-    "medias": [],
+    "medias": [
+      {
+        "type": "image",
+        "url": "/portfolio/1-thumb.png",
+        "full_url": "/portfolio/1.png"
+      },
+      {
+        "type": "image",
+        "url": "/portfolio/2-thumb.png",
+        "full_url": "/portfolio/2.png"
+      },
+      {
+        "type": "image",
+        "url": "/portfolio/3-thumb.png",
+        "full_url": "/portfolio/3.png"
+      },
+      {
+        "type": "image",
+        "url": "/portfolio/4-thumb.png",
+        "full_url": "/portfolio/4.png"
+      },
+      {
+        "type": "image",
+        "url": "/portfolio/5-thumb.png",
+        "full_url": "/portfolio/5.png"
+      }
+    ],
     "status": "Completed"
   }
 ]

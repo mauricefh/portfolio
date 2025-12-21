@@ -14,10 +14,10 @@
   --color-mono-100: #f5f5f5;
   --color-mono-white: #ffffff;
 
-  /* Accent */
-  --color-accent: #2563eb;
-  --color-accent-hover: #1d4ed8;
-  --color-accent-light: #3b82f6;
+  /* Accent - WCAG AAA compliant (7:1 contrast) */
+  --color-accent: #1e40af;
+  --color-accent-hover: #1e3a8a;
+  --color-accent-light: #2563eb;
 
   /* Status */
   --color-status-available: #22c55e;
@@ -125,32 +125,40 @@
   }
   .button-base {
     @apply border px-4 py-2 border rounded-md transition-colors;
+    text-decoration: none !important;
   }
-  .button-fill {
-    @apply bg-accent text-mono-white;
 
-    & a {
+  .button-fill {
+    @apply bg-accent;
+    color: var(--color-mono-white) !important;
+    text-decoration: none !important;
+
+    & span,
+    & svg {
       color: var(--color-mono-white);
-      text-decoration: none;
     }
 
     &:hover {
       background-color: var(--color-accent-hover);
     }
   }
-  .button-outline {
-    @apply border-accent text-accent;
 
-    & a {
+  .button-outline {
+    @apply border-accent;
+    color: var(--color-accent) !important;
+    text-decoration: none !important;
+
+    & span,
+    & svg {
       color: var(--color-accent);
-      text-decoration: none;
     }
 
     &:hover {
       background-color: var(--color-accent);
-      color: var(--color-mono-white);
+      color: var(--color-mono-white) !important;
 
-      & a {
+      & span,
+      & svg {
         color: var(--color-mono-white);
       }
     }
