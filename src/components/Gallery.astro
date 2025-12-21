@@ -1,3 +1,366 @@
 ---
-
+// Gallery.astro
+const { medias } = Astro.props;
 ---
+
+<div
+  class="gallery-root group"
+  data-medias={JSON.stringify(medias)}
+  tabindex="-1"
+>
+  <div class="overlays"></div>
+
+  <div class="media-container">
+    <img
+      class="gallery-image"
+      src=""
+      alt="Gallery Image"
+      style="display: none;"
+    />
+    <video class="gallery-video" controls style="display: none;"></video>
+  </div>
+
+  <svg
+    class="control btn-fullscreen"
+    viewBox="0 0 64 64"
+    fill="none"
+    stroke="black"
+  >
+    <polyline points="20 8 8 8 8 20"></polyline><line
+      x1="8"
+      y1="8"
+      x2="24"
+      y2="24"></line>
+    <polyline points="56 20 56 8 44 8"></polyline><line
+      x1="56"
+      y1="8"
+      x2="40"
+      y2="24"></line>
+    <polyline points="44 56 56 56 56 44"></polyline><line
+      x1="56"
+      y1="56"
+      x2="40"
+      y2="40"></line>
+    <polyline points="8 44 8 56 20 56"></polyline><line
+      x1="8"
+      y1="56"
+      x2="24"
+      y2="40"></line>
+  </svg>
+
+  <svg class="control btn-close" viewBox="0 0 24 24" fill="none" stroke="black">
+    <path
+      d="M7 17L16.8995 7.10051"
+      stroke-linecap="round"
+      stroke-linejoin="round"></path>
+    <path
+      d="M7 7.00001L16.8995 16.8995"
+      stroke-linecap="round"
+      stroke-linejoin="round"></path>
+  </svg>
+
+  <div class="control chevron nav-left">&#x276E</div>
+  <div class="control chevron nav-right">&#x276F</div>
+
+  <div class="media-counter">
+    <span class="current-index">1</span> / <span class="total-count">0</span>
+  </div>
+</div>
+
+<style>
+  .gallery-root {
+    position: relative;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    touch-action: pan-y;
+    overflow: hidden;
+    /* FIX: Create a local stacking context so buttons 
+       don't leak out to other cards */
+    isolation: isolate;
+    z-index: 1;
+  }
+
+  .gallery-root:focus {
+    outline: none;
+  }
+
+  .overlays {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: hsla(0, 0%, 0%, 85%);
+    z-index: -1; /* Sit behind the fullscreen media but inside the root */
+  }
+
+  .media-container {
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gallery-image,
+  .gallery-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Fullscreen Mode Scoping */
+  .gallery-root.fullscreen-mode {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* FIX: Jump to the absolute top of the page */
+    z-index: 99999 !important;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .fullscreen-mode .overlays {
+    display: block;
+  }
+  .fullscreen-mode .media-container {
+    width: 80vw;
+    height: 80vh;
+  }
+
+  .fullscreen-mode .gallery-image,
+  .fullscreen-mode .gallery-video {
+    object-fit: contain;
+  }
+
+  /* Controls Management */
+  .control {
+    cursor: pointer;
+    z-index: 7000;
+    position: absolute;
+  }
+
+  .btn-fullscreen,
+  .btn-close {
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    background-color: hsla(0deg, 0%, 100%, 75%);
+    border-radius: 50%;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-close {
+    display: none;
+  }
+  .fullscreen-mode .btn-fullscreen {
+    display: none;
+  }
+  .fullscreen-mode .btn-close {
+    display: flex;
+  }
+
+  .chevron {
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: hsla(0deg, 0%, 100%, 70%);
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-left {
+    left: 16px;
+  }
+  .nav-right {
+    right: 16px;
+  }
+
+  .media-counter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: hsla(0deg, 0%, 0%, 60%);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-family: sans-serif;
+    font-size: 14px;
+    z-index: 7000;
+  }
+
+  @media (max-width: 768px) {
+    .chevron {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  function initGalleries() {
+    const galleries = document.querySelectorAll(".gallery-root");
+
+    galleries.forEach((gallery) => {
+      if (gallery.getAttribute("data-initialized")) return;
+      gallery.setAttribute("data-initialized", "true");
+
+      const mediaItems = JSON.parse(gallery.dataset.medias);
+      const container = gallery.querySelector(".media-container");
+      const img = gallery.querySelector(".gallery-image");
+      const vid = gallery.querySelector(".gallery-video");
+      const currentLabel = gallery.querySelector(".current-index");
+      const totalLabel = gallery.querySelector(".total-count");
+
+      let index = 0;
+      totalLabel.textContent = mediaItems.length;
+
+      const update = (skip = false) => {
+        const item = mediaItems[index];
+        const swap = () => {
+          vid.pause();
+          vid.src = "";
+          if (item.type === "video") {
+            img.style.display = "none";
+            vid.style.display = "block";
+            vid.src = item.url;
+            vid.play().catch(() => {});
+          } else {
+            vid.style.display = "none";
+            img.style.display = "block";
+            img.src = item.url;
+          }
+          currentLabel.textContent = index + 1;
+        };
+        if (skip) return swap();
+        container.style.opacity = "0";
+        setTimeout(() => {
+          swap();
+          container.style.opacity = "1";
+        }, 200);
+      };
+
+      update(true);
+
+      // Navigation
+      gallery.querySelector(".nav-left").onclick = (e) => {
+        e.stopPropagation();
+        index = (index - 1 + mediaItems.length) % mediaItems.length;
+        update();
+      };
+      gallery.querySelector(".nav-right").onclick = (e) => {
+        e.stopPropagation();
+        index = (index + 1) % mediaItems.length;
+        update();
+      };
+
+      // Fullscreen & Focus Management
+      const toggle = (state) => {
+        gallery.classList.toggle("fullscreen-mode", state);
+        document.body.style.overflow = state ? "hidden" : "";
+
+        if (state) {
+          // FORCE FOCUS: This is the key for Escape to work
+          // Remove focus from any video elements that might capture keyboard events
+          const activeVideo = gallery.querySelector(".gallery-video");
+          if (activeVideo) {
+            activeVideo.blur();
+          }
+
+          // Focus the gallery container
+          setTimeout(() => {
+            gallery.focus();
+          }, 50);
+        } else {
+          // Restore focus when exiting fullscreen
+          gallery.blur();
+        }
+
+        const allGalleries = document.querySelectorAll(".gallery-root");
+        allGalleries.forEach((g) => {
+          if (g !== gallery) {
+            g.style.zIndex = state ? "0" : "1";
+            g.style.pointerEvents = state ? "none" : "auto";
+          }
+        });
+      };
+
+      gallery.querySelector(".btn-fullscreen").onclick = (e) => {
+        e.stopPropagation();
+        toggle(true);
+      };
+
+      gallery.querySelector(".btn-close").onclick = (e) => {
+        e.stopPropagation();
+        toggle(false);
+      };
+
+      gallery.querySelector(".overlays").onclick = () => toggle(false);
+
+      // Gestures
+      let startX = 0;
+      gallery.addEventListener(
+        "touchstart",
+        (e) => (startX = e.changedTouches[0].screenX),
+        { passive: true },
+      );
+      gallery.addEventListener("touchend", (e) => {
+        let diff = e.changedTouches[0].screenX - startX;
+        if (Math.abs(diff) > 50) {
+          index =
+            diff > 0
+              ? (index - 1 + mediaItems.length) % mediaItems.length
+              : (index + 1) % mediaItems.length;
+          update();
+        }
+      });
+    });
+  }
+
+  // GLOBAL KEYBOARD HANDLER
+  // Using both 'keydown' and 'keyup' as a fallback to catch Escape on all browsers
+  const handleKeys = (e) => {
+    const activeGallery = document.querySelector(
+      ".gallery-root.fullscreen-mode",
+    );
+    if (!activeGallery) return;
+
+    if (e.key === "Escape") {
+      e.preventDefault();
+      e.stopPropagation();
+      // Direct call to toggle function or click
+      activeGallery.querySelector(".btn-close").click();
+    }
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      activeGallery.querySelector(".nav-left").click();
+    }
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      activeGallery.querySelector(".nav-right").click();
+    }
+  };
+
+  // Remove any existing handler before adding new one
+  window.removeEventListener("keydown", handleKeys, true);
+  window.addEventListener("keydown", handleKeys, true);
+
+  // Initialize
+  initGalleries();
+  document.addEventListener("astro:after-swap", initGalleries);
+</script>

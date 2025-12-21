@@ -1,6 +1,5 @@
 [
   {
-    "id": 1,
     "title": "Anime Tracker",
     "summary": "A full-stack application to help users track their anime watching habits, manage subscriptions, and receive notifications for new episode releases.",
     "tags": [
@@ -19,12 +18,22 @@
     "source_url": "https://github.com/mauricefh/anime_tracker",
     "demo_url": "",
     "medias": [
-      "/placeholder.jpg"
+      {
+        "type": "video",
+        "url": "https://www.w3schools.com/html/mov_bbb.mp4"
+      },
+      {
+        "type": "image",
+        "url": "https://wallpapercave.com/wp/wp2320761.jpg"
+      },
+      {
+        "type": "image",
+        "url": "https://wallpapercave.com/wp/wp1895817.jpg"
+      }
     ],
     "status": "In Development"
   },
   {
-    "id": 2,
     "title": "Job Application Tracker",
     "summary": "A productivity tool designed to help job seekers manage their application pipeline, track follow-ups, and maintain organized records of their job search process",
     "tags": [
@@ -45,7 +54,6 @@
     "status": "Design"
   },
   {
-    "id": 3,
     "title": "Helhest Cane Corso",
     "summary": "A web platform connecting prospective dog owners with Cane Corso breeders, facilitating puppy adoption inquiries, and providing educational resources about the breed and responsible ownership.",
     "tags": [
@@ -61,12 +69,13 @@
     "source_url": "https://github.com/mauricefh/helest_cane_corso",
     "demo_url": "https://helehstcanecorso.com",
     "medias": [
-      "/placeholder.jpg"
+      "/helhest_cane_corso/1.png",
+      "/helhest_cane_corso/2.png",
+      "/helhest_cane_corso/3.png"
     ],
     "status": "Completed"
   },
   {
-    "id": 4,
     "title": "Portfolio",
     "summary": "A recruiter-optimized portfolio website showcasing development work through video demonstrations and strategic presentation, designed to maximize engagement and communicate technical capabilities within the first critical seconds of a recruiter's visit.",
     "tags": [

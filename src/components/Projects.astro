@@ -8,7 +8,7 @@ import projects from "../data/projects.json";
   <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
     {
       projects.map((item) => (
-        <ProjectItem id={item.id} title={item.title}, summary={item.summary}, tags={item.tags}, challenge={item.challenge}, solution={item.solution}, impact={item.impact}, source_url={item.source_url}, demo_url={item.demo_url} medias={item.medias} status={item.status}  />
+        <ProjectItem title={item.title}, summary={item.summary}, tags={item.tags}, challenge={item.challenge}, solution={item.solution}, impact={item.impact}, source_url={item.source_url}, demo_url={item.demo_url} medias={item.medias} status={item.status}  />
       ))
     }
   </div>

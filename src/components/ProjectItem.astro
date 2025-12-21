@@ -1,8 +1,8 @@
 ---
+import Gallery from "./Gallery.astro";
 import Tag from "./Tag.astro";
 import { Icon } from "astro-icon/components";
 const {
-  id,
   title,
   summary,
   tags,
@@ -19,22 +19,28 @@ const {
 <div
   class="flex min-h-[250px] min-w-[300px] flex-col gap-4 rounded-md border bg-mono-white p-4"
 >
-  <!-- gallery -->
-  <div class="w-full border border-accent">
-    <img
-      src={medias[0]}
-      alt={`${title} project screenshot`}
-      loading="lazy"
-      decoding="async"
-    />
+  <div
+    class="-mx-4 -mt-4 h-[350px] w-[calc(100%+2rem)] shrink-0 overflow-hidden border-b border-accent"
+  >
+    {
+      medias.length === 0 ? (
+        <img
+          src="/placeholder.png"
+          alt="placeholder image"
+          class="h-full w-full object-cover"
+        />
+      ) : (
+        <Gallery medias={medias} />
+      )
+    }
   </div>
-
   <!-- title, summary -->
   <div>
     <h2 class="text-on-light-heading">{title}</h2>
     <p class="text-on-light-body">{summary}</p>
     <span class="text-on-light-muted">
-      <strong class="text-on-light-strong">Status:</strong> {status}
+      <strong class="text-on-light-strong">Status:</strong>
+      {status}
     </span>
   </div>
 
@@ -46,7 +52,9 @@ const {
   <!-- challenge, solution, impact -->
   <div>
     <details>
-      <summary class="text-on-light-muted">Challenge, Solution and Impact</summary>
+      <summary class="text-on-light-muted"
+        >Challenge, Solution and Impact</summary
+      >
       <div class="flex flex-col">
         <strong class="text-on-light-strong">Challenge</strong>
         <p class="text-on-light-body">{challenge}</p>
