@@ -17,7 +17,8 @@ const { medias } = Astro.props;
       alt="Gallery Image"
       style="display: none;"
     />
-    <video class="gallery-video" controls style="display: none;"></video>
+    <video class="gallery-video" controls playsinline style="display: none;"
+    ></video>
   </div>
 
   <svg
@@ -112,14 +113,26 @@ const { medias } = Astro.props;
     object-fit: cover;
   }
 
-  /* Fullscreen Mode Scoping */
+  /* Fullscreen Mode Scoping - Using :fullscreen pseudo-class */
+  .gallery-root:fullscreen,
+  .gallery-root:-webkit-full-screen,
+  .gallery-root:-moz-full-screen,
+  .gallery-root:-ms-fullscreen {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Fallback for browsers without Fullscreen API support */
   .gallery-root.fullscreen-mode {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    /* FIX: Jump to the absolute top of the page */
     z-index: 99999 !important;
     background-color: black;
     display: flex;
@@ -127,17 +140,21 @@ const { medias } = Astro.props;
     justify-content: center;
   }
 
+  .gallery-root:fullscreen .overlays,
+  .gallery-root:-webkit-full-screen .overlays,
+  .gallery-root:-moz-full-screen .overlays,
+  .gallery-root:-ms-fullscreen .overlays,
   .fullscreen-mode .overlays {
     display: block;
   }
+
+  .gallery-root:fullscreen .media-container,
+  .gallery-root:-webkit-full-screen .media-container,
+  .gallery-root:-moz-full-screen .media-container,
+  .gallery-root:-ms-fullscreen .media-container,
   .fullscreen-mode .media-container {
     width: 80vw;
     height: 80vh;
-  }
-
-  .fullscreen-mode .gallery-image,
-  .fullscreen-mode .gallery-video {
-    object-fit: contain;
   }
 
   /* Controls Management */
@@ -164,9 +181,19 @@ const { medias } = Astro.props;
   .btn-close {
     display: none;
   }
+
+  .gallery-root:fullscreen .btn-fullscreen,
+  .gallery-root:-webkit-full-screen .btn-fullscreen,
+  .gallery-root:-moz-full-screen .btn-fullscreen,
+  .gallery-root:-ms-fullscreen .btn-fullscreen,
   .fullscreen-mode .btn-fullscreen {
     display: none;
   }
+
+  .gallery-root:fullscreen .btn-close,
+  .gallery-root:-webkit-full-screen .btn-close,
+  .gallery-root:-moz-full-screen .btn-close,
+  .gallery-root:-ms-fullscreen .btn-close,
   .fullscreen-mode .btn-close {
     display: flex;
   }
@@ -213,6 +240,75 @@ const { medias } = Astro.props;
 </style>
 
 <script>
+  // Fullscreen API with vendor prefix support
+  const fullscreenAPI = {
+    // Check if Fullscreen API is supported
+    isSupported: () => {
+      return !!(
+        document.fullscreenEnabled ||
+        document.webkitFullscreenEnabled ||
+        document.mozFullScreenEnabled ||
+        document.msFullscreenEnabled
+      );
+    },
+
+    // Request fullscreen on an element
+    request: (element) => {
+      if (element.requestFullscreen) {
+        return element.requestFullscreen();
+      } else if (element.webkitRequestFullscreen) {
+        return element.webkitRequestFullscreen();
+      } else if (element.mozRequestFullScreen) {
+        return element.mozRequestFullScreen();
+      } else if (element.msRequestFullscreen) {
+        return element.msRequestFullscreen();
+      }
+      return Promise.reject(new Error("Fullscreen not supported"));
+    },
+
+    // Exit fullscreen
+    exit: () => {
+      if (document.exitFullscreen) {
+        return document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        return document.webkitExitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        return document.mozCancelFullScreen();
+      } else if (document.msExitFullscreen) {
+        return document.msExitFullscreen();
+      }
+      return Promise.reject(new Error("Fullscreen not supported"));
+    },
+
+    // Get currently fullscreen element
+    getElement: () => {
+      return (
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement
+      );
+    },
+
+    // Get the event name for fullscreen changes
+    getChangeEventName: () => {
+      if (document.fullscreenEnabled) return "fullscreenchange";
+      if (document.webkitFullscreenEnabled) return "webkitfullscreenchange";
+      if (document.mozFullScreenEnabled) return "mozfullscreenchange";
+      if (document.msFullscreenEnabled) return "MSFullscreenChange";
+      return null;
+    },
+
+    // Get the event name for fullscreen errors
+    getErrorEventName: () => {
+      if (document.fullscreenEnabled) return "fullscreenerror";
+      if (document.webkitFullscreenEnabled) return "webkitfullscreenerror";
+      if (document.mozFullScreenEnabled) return "mozfullscreenerror";
+      if (document.msFullscreenEnabled) return "MSFullscreenError";
+      return null;
+    },
+  };
+
   function initGalleries() {
     const galleries = document.querySelectorAll(".gallery-root");
 
@@ -269,48 +365,179 @@ const { medias } = Astro.props;
         update();
       };
 
-      // Fullscreen & Focus Management
-      const toggle = (state) => {
-        gallery.classList.toggle("fullscreen-mode", state);
-        document.body.style.overflow = state ? "hidden" : "";
-
-        if (state) {
-          // FORCE FOCUS: This is the key for Escape to work
-          // Remove focus from any video elements that might capture keyboard events
-          const activeVideo = gallery.querySelector(".gallery-video");
-          if (activeVideo) {
-            activeVideo.blur();
-          }
-
-          // Focus the gallery container
-          setTimeout(() => {
-            gallery.focus();
-          }, 50);
-        } else {
-          // Restore focus when exiting fullscreen
-          gallery.blur();
+      // Fullscreen Management
+      const enterFullscreen = async () => {
+        // Check if Fullscreen API is supported
+        if (!fullscreenAPI.isSupported()) {
+          console.warn(
+            "Fullscreen API not supported, falling back to CSS fullscreen",
+          );
+          // Fallback to CSS fullscreen for unsupported browsers
+          gallery.classList.add("fullscreen-mode");
+          document.body.style.overflow = "hidden";
+          // Set object-fit directly via JS
+          img.style.objectFit = "contain";
+          vid.style.objectFit = "contain";
+          return;
         }
 
-        const allGalleries = document.querySelectorAll(".gallery-root");
-        allGalleries.forEach((g) => {
-          if (g !== gallery) {
-            g.style.zIndex = state ? "0" : "1";
-            g.style.pointerEvents = state ? "none" : "auto";
-          }
-        });
+        try {
+          // Set object-fit to contain before entering fullscreen
+          img.style.objectFit = "contain";
+          vid.style.objectFit = "contain";
+
+          // Request fullscreen on the gallery element itself
+          await fullscreenAPI.request(gallery);
+          // The fullscreenchange event will handle UI updates
+        } catch (err) {
+          console.error("Failed to enter fullscreen:", err);
+          // Fallback to CSS fullscreen if request fails
+          gallery.classList.add("fullscreen-mode");
+          document.body.style.overflow = "hidden";
+          img.style.objectFit = "contain";
+          vid.style.objectFit = "contain";
+        }
       };
 
+      const exitFullscreen = async () => {
+        // Check if we're currently in fullscreen
+        const fullscreenElement = fullscreenAPI.getElement();
+
+        if (fullscreenElement === gallery) {
+          // We're in native fullscreen, exit it
+          try {
+            // Reset object-fit to cover before exiting
+            img.style.objectFit = "cover";
+            vid.style.objectFit = "cover";
+
+            await fullscreenAPI.exit();
+            // The fullscreenchange event will handle UI updates
+          } catch (err) {
+            console.error("Failed to exit fullscreen:", err);
+          }
+        } else if (gallery.classList.contains("fullscreen-mode")) {
+          // We're in CSS fallback fullscreen
+          gallery.classList.remove("fullscreen-mode");
+          document.body.style.overflow = "";
+          // Reset object-fit to cover
+          img.style.objectFit = "cover";
+          vid.style.objectFit = "cover";
+        }
+      };
+
+      // Handle fullscreen state changes (including Escape key)
+      const handleFullscreenChange = () => {
+        const fullscreenElement = fullscreenAPI.getElement();
+        const isFullscreen = fullscreenElement === gallery;
+
+        // Update UI to reflect fullscreen state
+        if (!isFullscreen) {
+          // Clean up when exiting fullscreen
+          gallery.classList.remove("fullscreen-mode");
+          document.body.style.overflow = "";
+
+          // Reset object-fit to cover when exiting fullscreen
+          img.style.objectFit = "cover";
+          vid.style.objectFit = "cover";
+
+          // Restore other galleries
+          const allGalleries = document.querySelectorAll(".gallery-root");
+          allGalleries.forEach((g) => {
+            g.style.zIndex = "1";
+            g.style.pointerEvents = "auto";
+          });
+        } else {
+          // Optional: Add class for additional styling if needed
+          gallery.classList.add("fullscreen-mode");
+
+          // Set object-fit to contain when entering fullscreen
+          img.style.objectFit = "contain";
+          vid.style.objectFit = "contain";
+
+          // Hide other galleries while this one is fullscreen
+          const allGalleries = document.querySelectorAll(".gallery-root");
+          allGalleries.forEach((g) => {
+            if (g !== gallery) {
+              g.style.zIndex = "0";
+              g.style.pointerEvents = "none";
+            }
+          });
+        }
+      };
+
+      // Handle fullscreen errors
+      const handleFullscreenError = (e) => {
+        console.error("Fullscreen error:", e);
+        // Fallback to CSS fullscreen
+        gallery.classList.add("fullscreen-mode");
+        document.body.style.overflow = "hidden";
+      };
+
+      // Fullscreen button
       gallery.querySelector(".btn-fullscreen").onclick = (e) => {
         e.stopPropagation();
-        toggle(true);
+        enterFullscreen();
       };
 
+      // Close button
       gallery.querySelector(".btn-close").onclick = (e) => {
         e.stopPropagation();
-        toggle(false);
+        exitFullscreen();
       };
 
-      gallery.querySelector(".overlays").onclick = () => toggle(false);
+      // Overlay click to exit
+      gallery.querySelector(".overlays").onclick = () => exitFullscreen();
+
+      // Listen for fullscreen changes (including Escape key)
+      const changeEventName = fullscreenAPI.getChangeEventName();
+      const errorEventName = fullscreenAPI.getErrorEventName();
+
+      if (changeEventName) {
+        document.addEventListener(changeEventName, handleFullscreenChange);
+      }
+      if (errorEventName) {
+        document.addEventListener(errorEventName, handleFullscreenError);
+      }
+
+      // Store event names for cleanup later
+      gallery.dataset.fullscreenChangeEvent = changeEventName;
+      gallery.dataset.fullscreenErrorEvent = errorEventName;
+
+      // Keyboard navigation (works in both fullscreen and normal mode)
+      const handleGalleryKeys = (e) => {
+        // Only handle keys when this gallery is fullscreen
+        const fullscreenElement = fullscreenAPI.getElement();
+        const isFullscreen =
+          fullscreenElement === gallery ||
+          gallery.classList.contains("fullscreen-mode");
+
+        if (!isFullscreen) return;
+
+        switch (e.key) {
+          case "ArrowLeft":
+            e.preventDefault();
+            gallery.querySelector(".nav-left").click();
+            break;
+          case "ArrowRight":
+            e.preventDefault();
+            gallery.querySelector(".nav-right").click();
+            break;
+          case "Escape":
+            // Only handle Escape in CSS fallback mode
+            // Native fullscreen handles Escape automatically
+            if (
+              gallery.classList.contains("fullscreen-mode") &&
+              fullscreenElement !== gallery
+            ) {
+              e.preventDefault();
+              exitFullscreen();
+            }
+            break;
+        }
+      };
+
+      // Add keyboard listener to document for fullscreen support
+      document.addEventListener("keydown", handleGalleryKeys);
 
       // Gestures
       let startX = 0;
@@ -329,36 +556,40 @@ const { medias } = Astro.props;
           update();
         }
       });
+
+      // Cleanup for view transitions
+      if (!gallery.dataset.cleanupAdded) {
+        gallery.dataset.cleanupAdded = "true";
+
+        const cleanup = () => {
+          // Exit fullscreen if this gallery is currently fullscreen
+          const fullscreenElement = fullscreenAPI.getElement();
+          if (fullscreenElement === gallery) {
+            fullscreenAPI.exit().catch(() => {});
+          }
+
+          // Remove event listeners
+          const changeEventName = gallery.dataset.fullscreenChangeEvent;
+          const errorEventName = gallery.dataset.fullscreenErrorEvent;
+
+          if (changeEventName) {
+            document.removeEventListener(
+              changeEventName,
+              handleFullscreenChange,
+            );
+          }
+          if (errorEventName) {
+            document.removeEventListener(errorEventName, handleFullscreenError);
+          }
+
+          document.removeEventListener("keydown", handleGalleryKeys);
+        };
+
+        // Clean up on view transition
+        document.addEventListener("astro:before-swap", cleanup, { once: true });
+      }
     });
   }
-
-  // GLOBAL KEYBOARD HANDLER
-  // Using both 'keydown' and 'keyup' as a fallback to catch Escape on all browsers
-  const handleKeys = (e) => {
-    const activeGallery = document.querySelector(
-      ".gallery-root.fullscreen-mode",
-    );
-    if (!activeGallery) return;
-
-    if (e.key === "Escape") {
-      e.preventDefault();
-      e.stopPropagation();
-      // Direct call to toggle function or click
-      activeGallery.querySelector(".btn-close").click();
-    }
-    if (e.key === "ArrowLeft") {
-      e.preventDefault();
-      activeGallery.querySelector(".nav-left").click();
-    }
-    if (e.key === "ArrowRight") {
-      e.preventDefault();
-      activeGallery.querySelector(".nav-right").click();
-    }
-  };
-
-  // Remove any existing handler before adding new one
-  window.removeEventListener("keydown", handleKeys, true);
-  window.addEventListener("keydown", handleKeys, true);
 
   // Initialize
   initGalleries();

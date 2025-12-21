@@ -32,6 +32,14 @@
     "name": "Node.js"
   },
   {
+    "icon": "devicon:express",
+    "name": "Express.js"
+  },
+  {
+    "icon": "devicon:fastify",
+    "name": "Fastify"
+  },
+  {
     "icon": "devicon:tailwindcss",
     "name": "Tailwind CSS"
   },
